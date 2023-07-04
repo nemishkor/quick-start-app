@@ -16,7 +16,7 @@ RUN apk add --update --no-cache \
 
 COPY conf.d/php.ini /usr/local/etc/php/php.ini
 
-RUN docker-php-ext-install opcache
+RUN docker-php-ext-install -j$(nproc) opcache
 ARG PHP_OPCACHE_ENABLE="1"
 COPY conf.d/opcache.ini /usr/local/etc/php/conf.d/opcache.ini.template
 RUN export PHP_OPCACHE_ENABLE=$PHP_OPCACHE_ENABLE; \
